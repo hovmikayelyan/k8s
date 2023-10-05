@@ -1,0 +1,25 @@
+#-------------------------------------------------------------
+# Manifest File to create Pod with two Containers
+#
+# @hovm
+#-------------------------------------------------------------
+apiVersion : v1
+kind: Pod
+metadata:
+  name: my-app
+  labels:
+    env  : prod
+    app  : main
+    tier : frontend
+    owner: johnM
+spec:
+  containers:
+    - name : container-web
+      image: nginx:latest
+      ports:
+        - containerPort: 80
+
+    - name : container-api
+      image: tomcat:latest
+      ports:
+        - containerPort: 8080

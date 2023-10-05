@@ -1,0 +1,30 @@
+#---------------------------------------------------------------------
+# Manifest File to create AWS EKS Cluster in Custom VPC
+#
+# eksctl create cluster -f eks-cluster.yaml
+# eksctl delete cluster -f eks-cluster.yaml
+#
+# @hovm
+#---------------------------------------------------------------------
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name  : hovs-cluster
+  region: us-west-2
+
+# vpc:
+#  id     : "vpc-id"
+#  subnets:
+#    public:
+#       us-west-2a: { id: subnet-id }  # For Load Balancer
+#       us-west-2b: { id: subnet-id }  # For Load Balancer
+#    private:
+#       us-west-2a: { id: subnet-id }  # For Worker Nodes
+#       us-west-2b: { id: subnet-id }  # For Worker Nodes
+
+nodeGroups:
+  - name             : worker
+    instanceType     : t3.small
+    desiredCapacity  : 2
+    privateNetworking: true                         # Use Private Subnets
